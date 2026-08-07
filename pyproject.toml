@@ -1,0 +1,21 @@
+[project]
+name = "chatgpt-openscad"
+version = "0.1.0"
+description = "ChatGPT-facing gateway and QA packaging for a mature OpenSCAD MCP backend"
+requires-python = ">=3.11"
+dependencies = [
+  "openscad-mcp-server==0.15.1",
+  "mcp-proxy==0.12.0",
+]
+
+[project.optional-dependencies]
+test = [
+  "mcp>=1.27,<2",
+  "pytest>=8,<9",
+  "pytest-asyncio>=1,<2",
+]
+
+[tool.pytest.ini_options]
+addopts = "-q"
+testpaths = ["tests"]
+asyncio_mode = "auto"
