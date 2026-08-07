@@ -1,0 +1,22 @@
+name: CI
+
+on:
+  push:
+    branches: [main, "agent/**"]
+  pull_request:
+
+jobs:
+  upstream-gateway-smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install pinned upstream gateway stack
+        run: python -m pip install -e ".[test]"
+
+      - name: Verify stdio upstream over Streamable HTTP
+        run: pytest
